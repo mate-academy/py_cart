@@ -16,6 +16,9 @@ class Product:
         """Get cost of all products"""
         return self.price * self.qty
 
+    def __str__(self):
+        return self.__class__.__name__
+
 
 class Cart:
     """Class Cart"""
