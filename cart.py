@@ -5,19 +5,26 @@ Cart class and calculate total.
 """
 
 from csv import reader
-from functools import reduce
 
 
 class Product:
     """
     class product
     """
-    # pylint: disable=too-few-public-methods
 
     def __init__(self, name, price, qty):
         self.name = name
         self.price = price
         self.qty = qty
+
+    def get_name(self):
+        return self.name
+
+    def get_price(self):
+        return self.price
+
+    def get_qty(self):
+        return self.qty
 
 
 class Cart:
@@ -26,7 +33,17 @@ class Cart:
     """
 
     def __init__(self, filename):
-        self.filename = filename
+        self.cart_lst = []
+
+        with open(filename, 'rt') as file:
+            product_lsts = list(reader(file, delimiter=','))
+            for product_lst in product_lsts:
+                product = Product(
+                    product_lst[0],
+                    float(product_lst[1]),
+                    float(product_lst[2])
+                )
+                self.cart_lst.append(product)
 
     def get_product(self, index: int) -> Product:
         """
@@ -34,15 +51,7 @@ class Cart:
         :param index: int
         :return: Product
         """
-        with open(self.filename, 'rt') as file:
-            csv_reader = list(reader(file, delimiter=','))
-            prod_param_lst = csv_reader[index]
-            product = Product(
-                prod_param_lst[0],
-                float(prod_param_lst[1]),
-                float(prod_param_lst[2])
-            )
-            return product
+        return self.cart_lst[index]
 
     def calc_total(self) -> float:
         """
@@ -51,10 +60,7 @@ class Cart:
         Calculate total cost for all products (price * quantity).
         :return: float
         """
-        with open(self.filename, 'rt') as file:
-            sum_prod_costs = 0.0
-            csv_reader = reader(file, delimiter=',')
-            param_lsts = [list(map(float, line[1:])) for line in csv_reader]
-            for lst in param_lsts:
-                sum_prod_costs += reduce((lambda x, y: x * y), lst)
-        return sum_prod_costs
+        total_sum = 0
+        for product in self.cart_lst:
+            total_sum += product.get_price() * product.get_qty()
+        return total_sum
