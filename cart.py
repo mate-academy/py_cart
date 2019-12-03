@@ -19,21 +19,21 @@ class Product:
         self.price = price
         self.qty = qty
 
-    def pie(self):
+    def get_name(self):
         """
         Return amount of pies from given
         qty of fruits
         :return:
         """
-        return self.qty / 2
+        return self.name
 
-    def juice(self):
+    def get_qty(self):
         """
         Return amount of juice glasses from given
         qty of fruits
         :return:
         """
-        return self.qty / 5
+        return self.qty
 
 
 class Cart:
@@ -48,13 +48,14 @@ class Cart:
         self.csv_name = csv_name
         with open(self.csv_name, 'rt') as file:
             self.csv = [line.split(',') for line in file.readlines()]
+            self.sum = sum(float(line[1]) * int(line[2]) for line in self.csv)
 
     def calc_total(self):
         """
 
         :return:
         """
-        return sum(float(line[1]) * int(line[2]) for line in self.csv)
+        return self.sum
 
     def get_product(self, param):
         """
