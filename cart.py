@@ -19,6 +19,22 @@ class Product:
         self.price = price
         self.qty = qty
 
+    def pie(self):
+        """
+        Return amount of pies from given
+        qty of fruits
+        :return:
+        """
+        return self.qty / 2
+
+    def juice(self):
+        """
+        Return amount of juice glasses from given
+        qty of fruits
+        :return:
+        """
+        return self.qty / 5
+
 
 class Cart:
     """
