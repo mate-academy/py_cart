@@ -11,9 +11,7 @@ from functools import reduce
 class Product:
     """
     class product
-    base for My Celery tasks with common behaviors; extends celery.Task
     """
-
     # pylint: disable=too-few-public-methods
 
     def __init__(self, name, price, qty):
