@@ -8,11 +8,10 @@ class Product:
         self.name = name
         self.price = float(price)
         self.qty = float(qty)
-        self.cost = self.qty * self.price
 
-    def get_total_cost(self):
-        """return total cost of product"""
-        return self.cost
+    def get_qty(self):
+        """return quantity of product"""
+        return self.qty
 
     def get_price(self):
         """return price of product"""
@@ -51,5 +50,5 @@ class Cart:
         """return total cost of products in cart"""
         total = 0
         for i in range(len(self._objects)):
-            total += self.get_product(i).cost
+            total += self.get_product(i).price * self.get_product(i).qty
         return total
