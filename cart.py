@@ -69,7 +69,7 @@ class Cart:
 
         :return:
         '''
-        total = 0
+        result = 0
         for i in self.card_list:
-            total += i.get_price() * i.get_qty()
-        return total
+            result += i.get_price() * i.get_qty()
+        return result
