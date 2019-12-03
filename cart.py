@@ -1,13 +1,13 @@
 """Product and Cart class realisation"""
-import csv
+from csv import reader
 
 
 class Product:
     """Product class"""
     def __init__(self, name, price, qty):
         self.name = name
-        self.price = float(price)
-        self.qty = int(qty)
+        self.price = price
+        self.qty = qty
 
     def __str__(self):
         return self.name
@@ -22,16 +22,12 @@ class Product:
 class Cart:
     """Product class"""
     def __init__(self, file):
-        self.file = file
-
-    def open_csv(self):
-        """
-        Open csv file
-        :return: list
-        """
-        with open(self.file, 'rt') as csvfile:
-            reader = list(csv.reader(csvfile, delimiter=','))
-        return reader
+        self.product_list = []
+        with open(file, 'rt') as csvfile:
+            csv = list(reader(csvfile, delimiter=','))
+            for name, price, qty in csv:
+                product = Product(name, float(price), int(qty))
+                self.product_list.append(product)
 
     def get_product(self, index):
         """
@@ -39,17 +35,14 @@ class Cart:
         :param index: csv file line
         :return: instance class Product
         """
-        reader = self.open_csv()
-        product = Product(reader[index][0], reader[index][1], reader[index][2])
-        return product
+        return self.product_list[index]
 
     def calc_total(self):
         """
         Count total price in all csv file
         :return: total price
         """
-        reader = self.open_csv()
         result = 0
-        for row in reader:
-            result += float(row[1]) * float(row[2])
+        for product in self.product_list:
+            result += product.money_balance()
         return result
