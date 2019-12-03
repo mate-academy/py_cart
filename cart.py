@@ -21,16 +21,14 @@ class Product:
 
     def get_name(self):
         """
-        Return amount of pies from given
-        qty of fruits
+        Return products name
         :return:
         """
         return self.name
 
     def get_qty(self):
         """
-        Return amount of juice glasses from given
-        qty of fruits
+        return products qty
         :return:
         """
         return self.qty
