@@ -18,12 +18,24 @@ class Product:
         self.qty = qty
 
     def get_name(self):
+        """
+        Return name of the product
+        :return: str
+        """
         return self.name
 
     def get_price(self):
+        """
+        Return price of the product
+        :return: float
+        """
         return self.price
 
     def get_qty(self):
+        """
+        Return quantity of the product
+        :return: float
+        """
         return self.qty
 
 
@@ -47,7 +59,7 @@ class Cart:
 
     def get_product(self, index: int) -> Product:
         """
-        Return product from csv file by using index parameter.
+        Return product from cart list by using index parameter.
         :param index: int
         :return: Product
         """
@@ -55,8 +67,6 @@ class Cart:
 
     def calc_total(self) -> float:
         """
-        There is a CSV file containing data in this format:
-        Product name, price, quantity
         Calculate total cost for all products (price * quantity).
         :return: float
         """
