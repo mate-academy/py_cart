@@ -46,14 +46,14 @@ class Cart:
         self.csv_name = csv_name
         with open(self.csv_name, 'rt') as file:
             self.csv = [line.split(',') for line in file.readlines()]
-            self.sum = sum(float(line[1]) * int(line[2]) for line in self.csv)
+            self.total = sum(float(line[1]) * int(line[2]) for line in self.csv)
 
     def calc_total(self):
         """
-
+        total
         :return:
         """
-        return self.sum
+        return self.total
 
     def get_product(self, param):
         """
