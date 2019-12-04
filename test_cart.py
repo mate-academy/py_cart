@@ -1,8 +1,15 @@
+"""
+docstring
+"""
 import cart
 
 
 def test_product():
-    c = cart.Cart("product.csv")
+    """
+
+    :return:
+    """
+    c = cart.Cart("products.csv")
     p = c.get_product(0)
     assert isinstance(p, cart.Product)
     assert p.name == "Apples"
@@ -11,5 +18,9 @@ def test_product():
 
 
 def test_cart():
-    c = cart.Cart("product.csv")
+    """
+
+    :return:
+    """
+    c = cart.Cart("products.csv")
     assert c.calc_total() == 74.3
