@@ -11,45 +11,26 @@ class Product:
     """
     Attributes
     ----------
-    file_name : str
-        name of the file which contains products
-    volume : str
+    volume : list
         all products from the file_name file
-    num_of_prod : int
-        number of the products
 
     Methods
     -------
-    get_product(file_name)
     name() -- Return name of the product
     price() -- Return price of the product
     qty() -- Return quantity of the products
     """
 
-    def __init__(self, file_name):
-        self.file_name = file_name
-        self.volume = None
-        self.num_of_prod = None
-
-    def get_product(self, list_order):
-        """
-        Read from the file_name file
-        :param list_order: int
-        :return: self
-        """
-        with open(self.file_name, 'r') as file:
-            file_list = list(csv.reader(file))
-            self.num_of_prod = len(file_list)
-            self.volume = file_list[list_order]
-            return self
+    def __init__(self):
+        self.volume = []
 
     def name(self):
         """
         Return name of the product
         :return: str
         """
-        name = 0
-        return self.volume[name]
+        name_index = 0
+        return self.volume[name_index]
 
     def price(self):
         """
@@ -76,10 +57,35 @@ class Product:
 
 class Cart(Product):
     """
+    Attributes
+    ----------
+    file_name : str
+        name of the file which contains products
+    products_amount : int
+        number of the products
     Methods
     -------
+    get_product(list_order) -- Read products from the file
     calv_total() -- Return total cost of all products
     """
+
+    def __init__(self, file_name):
+        super().__init__()
+        self.file_name = file_name
+        self.get_product(0)
+        self.products_amount = self.products_amount
+
+    def get_product(self, list_order):
+        """
+        Read from the file_name file
+        :param list_order: int
+        :return: self
+        """
+        with open(self.file_name, 'r') as cart:
+            products_list = list(csv.reader(cart))
+            self.products_amount = len(products_list)
+            self.volume = products_list[list_order]
+            return self
 
     def calc_total(self):
         """
@@ -88,7 +94,7 @@ class Cart(Product):
         """
         total = 0
         self.get_product(0)
-        for idx in range(self.num_of_prod):
+        for idx in range(self.products_amount):
             self.get_product(idx)
             total += self.price() * self.qty()
         return total
