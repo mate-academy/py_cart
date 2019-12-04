@@ -44,8 +44,11 @@ class Cart:
         :param csv_name:
         """
         self.csv_name = csv_name
+        self.prod_list = []
         with open(self.csv_name, 'rt') as file:
             self.csv = [line.split(',') for line in file.readlines()]
+            for name, price, qty in self.csv:
+                self.prod_list.append(Product(name, float(price), int(qty)))
             self.total = sum(float(line[1]) * int(line[2]) for line in self.csv)
 
     def calc_total(self):
@@ -61,4 +64,4 @@ class Cart:
         :param param:
         :return:
         """
-        return Product(self.csv[param][0], float(self.csv[param][1]), int(self.csv[param][2]))
+        return self.prod_list[param]
