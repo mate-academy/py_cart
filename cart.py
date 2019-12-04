@@ -5,6 +5,9 @@ Then add them to an instance of the Cart class and calculate total.
 """
 
 
+import csv
+
+
 class Product:
     """Class Product"""
     def __init__(self, name, price, qty):
@@ -27,9 +30,9 @@ class Cart:
         self.file_name = file_name
         self.card_list = []
         with open(file_name, 'rt') as rfile:
-            for line in rfile.readlines():
-                lst_line = line.split(',')
-                product = Product(lst_line[0], float(lst_line[1]), int(lst_line[2]))
+            reader = csv.reader(rfile)
+            for line in reader:
+                product = Product(line[0], float(line[1]), int(line[2]))
                 self.card_list.append(product)
 
     def get_product(self, num):
@@ -38,7 +41,7 @@ class Cart:
 
     def calc_total(self):
         """Get total"""
-        total = 0
+        total = []
         for i in self.card_list:
-            total += i.get_cost()
-        return total
+            total.append(i.get_cost())
+        return sum(total)
