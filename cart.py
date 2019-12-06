@@ -34,7 +34,7 @@ class Cart:
         try:
             return self._products[index]
         except IndexError:
-            print('There is only {0}'.format(str(len(self._products))))
+            print('There are only {0}'.format(str(len(self._products))))
 
     def calc_total(self):
         """Return total sum of all products"""
